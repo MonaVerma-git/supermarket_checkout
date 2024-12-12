@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_renaming_method_parameters
+
 import '../../../../core/usecase.dart';
 import '../entities/promotion.dart';
 import '../repositories/pricing_repository.dart';
@@ -12,6 +14,7 @@ class CalculateTotal extends UseCase<int, List<String>> {
     final items = repository.getItems();
     final promotions = repository.getPromotions();
 
+    // Map sku counts
     Map<String, int> skuCount = {};
     for (var sku in scannedItems) {
       skuCount[sku] = (skuCount[sku] ?? 0) + 1;
@@ -21,11 +24,12 @@ class CalculateTotal extends UseCase<int, List<String>> {
 
     // Apply promotions
     for (var promotion in promotions) {
-      if (promotion.type == PromotionType.multipriced) {
+      if (promotion.type == PromotionType.multipriced &&
+          promotion.quantity > 0) {
         final sku = promotion.items[0];
         final quantity = skuCount[sku] ?? 0;
 
-        final bundleCount = quantity ~/ promotion.quantity;
+        final bundleCount = (quantity / promotion.quantity).floor();
         total += bundleCount * promotion.specialPrice;
 
         skuCount[sku] = quantity % promotion.quantity;
@@ -33,7 +37,7 @@ class CalculateTotal extends UseCase<int, List<String>> {
         final sku = promotion.items[0];
         final quantity = skuCount[sku] ?? 0;
 
-        final freeItems = quantity ~/ (promotion.quantity + 1);
+        final freeItems = (quantity / (promotion.quantity + 1)).floor();
         total += (quantity - freeItems) *
             items.firstWhere((item) => item.sku == sku).price;
 

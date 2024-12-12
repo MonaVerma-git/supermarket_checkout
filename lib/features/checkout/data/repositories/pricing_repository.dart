@@ -20,8 +20,8 @@ class PricingRepositoryImpl implements PricingRepository {
       Promotion(
           type: PromotionType.multipriced,
           items: ['A'],
-          specialPrice: 130,
-          quantity: 3),
+          specialPrice: 0,
+          quantity: 0),
       Promotion(
           type: PromotionType.multipriced,
           items: ['B'],
