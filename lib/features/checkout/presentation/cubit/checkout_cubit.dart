@@ -1,21 +1,20 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../domain/usecases/calculate_totol.dart';
+import '../../domain/usecases/scan_item.dart';
 
-import 'checkout_state.dart';
+class CheckoutCubit extends Cubit<int> {
+  final CalculateTotal calculateTotal;
+  final ScanItem scanItem;
 
-class CheckoutCubit extends Cubit<CheckoutState> {
-  CheckoutCubit() : super(const CheckoutState(isLoading: true));
+  CheckoutCubit(this.calculateTotal, this.scanItem) : super(0);
 
-  Future<void> loadInitialData() async {
-    final stableState = state;
-    try {
-      emit(state.copyWith(isLoading: true));
+  void scan(String sku) {
+    scanItem.call(sku);
+    _calculateTotal();
+  }
 
-      // TODO your code here
-
-      emit(state.copyWith(isLoading: false));
-    } catch (error) {
-      emit(state.copyWith(error: error.toString()));
-      emit(stableState.copyWith(isLoading: false));
-    }
+  void _calculateTotal() async {
+    final total = await calculateTotal.call(scanItem.scannedItems);
+    emit(total);
   }
 }

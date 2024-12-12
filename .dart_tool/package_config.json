@@ -74,6 +74,24 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "flutter_web_plugins",
+      "rootUri": "file:///Users/monavishnu/Development/flutter/packages/flutter_web_plugins",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "get_it",
+      "rootUri": "file:///Users/monavishnu/.pub-cache/hosted/pub.dev/get_it-8.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "go_router",
+      "rootUri": "file:///Users/monavishnu/.pub-cache/hosted/pub.dev/go_router-14.6.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
       "name": "leak_tracker",
       "rootUri": "file:///Users/monavishnu/.pub-cache/hosted/pub.dev/leak_tracker-10.0.5",
       "packageUri": "lib/",
@@ -96,6 +114,12 @@
       "rootUri": "file:///Users/monavishnu/.pub-cache/hosted/pub.dev/lints-4.0.0",
       "packageUri": "lib/",
       "languageVersion": "3.1"
+    },
+    {
+      "name": "logging",
+      "rootUri": "file:///Users/monavishnu/.pub-cache/hosted/pub.dev/logging-1.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
     },
     {
       "name": "matcher",
@@ -194,7 +218,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-12-11T19:56:13.125900Z",
+  "generated": "2024-12-12T17:33:29.295417Z",
   "generator": "pub",
   "generatorVersion": "3.5.3",
   "flutterRoot": "file:///Users/monavishnu/Development/flutter",
