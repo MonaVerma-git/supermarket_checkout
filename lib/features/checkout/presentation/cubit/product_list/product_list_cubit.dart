@@ -10,8 +10,7 @@ class ProductListCubit extends Cubit<ProductListState> {
     try {
       emit(ProductListLoading());
       final items = pricingRepository.getItems();
-      final promotionItem = pricingRepository.getPromotions();
-      emit(ProductListLoaded(items, promotionItem));
+      emit(ProductListLoaded(items));
     } catch (error) {
       emit(ProductListError('Something went wrong'));
     }

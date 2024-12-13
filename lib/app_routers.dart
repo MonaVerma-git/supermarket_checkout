@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supermarket/features/checkout/presentation/cubit/checkout/checkout_cubit.dart';
 
-import 'features/checkout/presentation/cubit/checkout_cubit.dart';
 import 'features/checkout/presentation/cubit/product_list/product_list_cubit.dart';
 import 'features/checkout/presentation/screens/product_list.dart';
 import 'injection/service_locator.dart';
@@ -13,18 +13,25 @@ class AppRouters {
       routes: [
         GoRoute(
           path: '/product_list',
-          builder: (context, state) => BlocProvider(
-            create: (_) => getIt<ProductListCubit>(),
+          builder: (context, state) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => getIt<ProductListCubit>(),
+              ),
+              BlocProvider(
+                create: (_) => getIt<CheckoutCubit>(),
+              ),
+            ],
             child: const ProductListPage(),
           ),
         ),
-        // GoRoute(
-        //   path: '/checkout',
-        //   builder: (context, state) => BlocProvider(
-        //     create: (_) => getIt<CheckoutCubit>(),
-        //     child: const ProductListPage(),
-        //   ),
-        // )
+        GoRoute(
+          path: '/checkout',
+          builder: (context, state) => BlocProvider(
+            create: (_) => getIt<CheckoutCubit>(),
+            child: const ProductCheckout(),
+          ),
+        )
       ],
       // errorBuilder: (context, state) => Error(),
     );

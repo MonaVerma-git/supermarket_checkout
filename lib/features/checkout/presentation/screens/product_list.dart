@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
+import 'package:supermarket/features/checkout/presentation/cubit/checkout/checkout_cubit.dart';
 import 'package:supermarket/features/checkout/presentation/cubit/product_list/product_list_cubit.dart';
 
 import '../../../../core/color.dart';
+import '../cubit/checkout/checkout_state.dart';
 import '../cubit/product_list/product_list_state.dart';
 import '../widgets/item_card.dart';
 
@@ -32,17 +33,21 @@ class _ProductListPageState extends State<ProductListPage> {
         centerTitle: true,
         backgroundColor: AppColors.primaryColor,
         actions: [
-          IconButton(
-            icon: const Badge(
-              label: Text('1'),
-              backgroundColor: AppColors.redColor,
-              child: Icon(
-                Icons.add_shopping_cart,
-                color: Colors.white,
-                size: 32,
-              ),
-            ),
-            onPressed: () {},
+          BlocBuilder<CheckoutCubit, CheckoutState>(
+            builder: (context, state) {
+              return IconButton(
+                icon: Badge(
+                  label: Text(state.totalItemCount.toString()),
+                  backgroundColor: AppColors.redColor,
+                  child: const Icon(
+                    Icons.add_shopping_cart,
+                    color: Colors.white,
+                    size: 32,
+                  ),
+                ),
+                onPressed: () {},
+              );
+            },
           )
         ],
       ),
@@ -50,8 +55,6 @@ class _ProductListPageState extends State<ProductListPage> {
         builder: (context, state) {
           if (state is ProductListLoaded) {
             return GridView.builder(
-              primary: false,
-              padding: const EdgeInsets.all(20),
               itemCount: state.items.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2),
