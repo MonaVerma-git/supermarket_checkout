@@ -53,8 +53,6 @@ class ProductCheckoutPage extends StatelessWidget {
         ),
         body: BlocBuilder<CheckoutCubit, CheckoutState>(
           builder: (context, state) {
-            print(
-                "Checkout State: ${state.cartItems[1].item.promotion?.requiredQuantity} ");
             return state.cartItems.isEmpty
                 ? const SizedBox(
                     child: EmptyCartWidget(),
@@ -63,59 +61,69 @@ class ProductCheckoutPage extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                        ListView.builder(
+                        ListView.separated(
                             shrinkWrap: true,
                             itemCount: state.cartItems.length,
+                            separatorBuilder: (context, index) =>
+                                const Divider(),
                             itemBuilder: (context, index) {
                               final item = state.cartItems[index].item;
-                              return Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                                child: ListTile(
-                                    leading: CircleAvatar(
-                                        radius: 28,
-                                        backgroundColor: AppColors.primaryColor,
-                                        child: Text(
-                                          item.sku,
-                                          style: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white),
-                                        )),
-                                    title: Text(
-                                      item.sku,
-                                      style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    subtitle: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '£${item.price / 100}',
-                                          style: const TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                        // item.promotion != null
-                                        //     ? PromotionWidget(
-                                        //         promotion: item.promotion!)
-                                        //     : const SizedBox.shrink(),
-                                      ],
-                                    ),
-                                    trailing: SizedBox(
-                                      width: 120,
-                                      child: AddRemoveWidget(
-                                          item: Item(sku: 'A', price: 125)),
-                                    )),
-                              );
+                              print(item.promotion);
+                              return ListTile(
+                                  contentPadding: EdgeInsets.all(5.0),
+                                  leading: CircleAvatar(
+                                      radius: 28,
+                                      backgroundColor: AppColors.primaryColor,
+                                      child: Text(
+                                        item.sku,
+                                        style: const TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                      )),
+                                  title: Text(
+                                    item.sku,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  subtitle: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '£${item.price / 100}',
+                                        style: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                      item.promotion != null
+                                          ? PromotionWidget(
+                                              promotion: item.promotion!)
+                                          : const SizedBox.shrink(),
+                                    ],
+                                  ),
+                                  trailing: SizedBox(
+                                    width: 120,
+                                    child: AddRemoveWidget(item: item),
+                                  ));
                             }),
-                        const SizedBox(height: 30),
-                        getItemTotal('Total item', 6),
+                        Container(
+                          padding: const EdgeInsets.all(8.0),
+                          width: double.infinity,
+                          color: AppColors.primaryColor,
+                          child: const Text(
+                            textAlign: TextAlign.center,
+                            'Price Total',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        getItemTotal('Total item', state.totalItemCount),
                         getItemTotal('Price', 6),
                         getItemTotal('Discount', 6),
                         const Divider(),

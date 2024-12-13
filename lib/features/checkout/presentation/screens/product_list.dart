@@ -46,8 +46,7 @@ class _ProductListPageState extends State<ProductListPage> {
                     size: 32,
                   ),
                 ),
-                onPressed: () =>
-                    context.go('/checkout', extra: state.cartItems),
+                onPressed: () => context.go('/checkout'),
               );
             },
           )

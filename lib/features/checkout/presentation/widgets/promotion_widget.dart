@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import '../../../../core/colors.dart';
+import '../../../../core/app_colors.dart';
 import '../../domain/entities/promotion.dart';
 
 class PromotionWidget extends StatelessWidget {
