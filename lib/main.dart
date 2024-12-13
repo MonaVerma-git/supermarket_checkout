@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermarket/app_routers.dart';
-import 'injection/service_locator.dart';
+import 'package:supermarket/core/bloc_providers.dart';
+import 'core/service_locator.dart';
 
 void main() {
   initServices();
-  runApp(SuperMarketApp());
+  runApp(
+    MultiBlocProvider(
+      providers: AppBlocProviders.providers,
+      child: SuperMarketApp(),
+    ),
+  );
 }
 
 class SuperMarketApp extends StatelessWidget {

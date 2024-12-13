@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:supermarket/features/checkout/presentation/cubit/checkout/checkout_cubit.dart';
 import 'package:supermarket/features/checkout/presentation/cubit/product_list/product_list_cubit.dart';
 
-import '../../../../core/color.dart';
+import '../../../../core/app_colors.dart';
 import '../cubit/checkout/checkout_state.dart';
 import '../cubit/product_list/product_list_state.dart';
-import '../widgets/item_card.dart';
+import '../widgets/item_card_widget.dart';
 
 class ProductListPage extends StatefulWidget {
   const ProductListPage({super.key});
@@ -45,7 +46,8 @@ class _ProductListPageState extends State<ProductListPage> {
                     size: 32,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () =>
+                    context.go('/checkout', extra: state.cartItems),
               );
             },
           )
@@ -62,7 +64,7 @@ class _ProductListPageState extends State<ProductListPage> {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ItemCardWidget(
-                    items: state.items[index],
+                    item: state.items[index],
                   ),
                 );
               },

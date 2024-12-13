@@ -8,24 +8,24 @@ class PricingRepositoryImpl implements PricingRepository {
 
   @override
   Future<void> addItem(String sku, int price) async {
-    final index = _cart.indexWhere((item) => item.sku == sku);
+    final index = _cart.indexWhere((items) => items.item.sku == sku);
     if (index != -1) {
-      _cart[index] =
-          CartItem(sku: sku, unitPrice: price, count: _cart[index].count + 1);
+      _cart[index] = CartItem(
+          item: Item(sku: sku, price: price), count: _cart[index].count + 1);
     } else {
-      _cart.add(CartItem(sku: sku, unitPrice: price, count: 1));
+      _cart.add(CartItem(item: Item(sku: sku, price: price), count: 1));
     }
   }
 
   @override
   Future<void> removeItem(String sku) async {
-    final index = _cart.indexWhere((item) => item.sku == sku);
+    final index = _cart.indexWhere((items) => items.item.sku == sku);
     if (index != -1) {
       if (_cart[index].count > 1) {
         _cart[index] = CartItem(
-            sku: sku,
-            unitPrice: _cart[index].unitPrice,
-            count: _cart[index].count - 1);
+          item: Item(sku: sku, price: _cart[index].item.price),
+          count: _cart[index].count - 1,
+        );
       } else {
         _cart.removeAt(index);
       }

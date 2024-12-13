@@ -80,14 +80,14 @@ class CalculateTotalPriceUseCase {
     int totalPrice = 0;
 
     for (final item in cartItems) {
-      final rule = rules.firstWhere((r) => r.sku == item.sku);
+      final rule = rules.firstWhere((r) => r.sku == item.item.sku);
       totalPrice += _calculateItemPrice(item, rule);
     }
     return totalPrice;
   }
 
   int _calculateItemPrice(CartItem item, Item rule) {
-    if (rule.promotion == null) return item.unitPrice * item.count;
+    if (rule.promotion == null) return item.item.price * item.count;
 
     final promotion = rule.promotion!;
     switch (promotion.type) {
@@ -95,15 +95,15 @@ class CalculateTotalPriceUseCase {
         int discountedSets = (item.count / promotion.requiredQuantity).floor();
         int remainingItems = item.count % promotion.requiredQuantity;
         return (discountedSets * promotion.specialPrice) +
-            (remainingItems * item.unitPrice);
+            (remainingItems * item.item.price);
       case PromotionType.buyNGetOneFree:
         int chargeableCount =
             (item.count / promotion.requiredQuantity).floor() *
                     (promotion.requiredQuantity - 1) +
                 (item.count % promotion.requiredQuantity);
-        return chargeableCount * item.unitPrice;
+        return chargeableCount * item.item.price;
       default:
-        return item.unitPrice * item.count;
+        return item.item.price * item.count;
     }
   }
 }
