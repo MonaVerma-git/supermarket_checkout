@@ -58,10 +58,10 @@ lib/
 │   │   ├── cubit/             # BLoC (Cubit) for state management
 │   │   ├── screens/           # Screens (e.g., ProductListPage, CheckoutPage)
 │   │   └── widgets/           # Reusable UI widgets
-│
-└── test/                      # Unit and Widget tests
-    ├── features/checkout/     # Tests for checkout feature
-    └── ...
+│   
+└── app_routers.dart           # Router setup
+└── main.dart                  # Run app setup
+
 ```
 
 ---
