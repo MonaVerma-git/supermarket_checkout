@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supermarket/core/app_colors.dart';
-import 'package:supermarket/features/checkout/domain/entities/item.dart';
 import 'package:supermarket/features/checkout/presentation/cubit/checkout/checkout_cubit.dart';
 import 'package:supermarket/features/checkout/presentation/widgets/add_remove_widget.dart';
 
+import '../../domain/entities/promotion.dart';
 import '../cubit/checkout/checkout_state.dart';
 import '../widgets/empty_cart_widget.dart';
 import '../widgets/promotion_widget.dart';
@@ -13,7 +13,7 @@ import '../widgets/promotion_widget.dart';
 class ProductCheckoutPage extends StatelessWidget {
   const ProductCheckoutPage({super.key});
 
-  Widget getItemTotal(String title, int value) => Padding(
+  Widget getItemTotal(String title, String value) => Padding(
         padding: const EdgeInsets.fromLTRB(18.0, 5.0, 18.0, 5.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -26,7 +26,7 @@ class ProductCheckoutPage extends StatelessWidget {
               ),
             ),
             Text(
-              value.toString(),
+              value,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
@@ -35,6 +35,18 @@ class ProductCheckoutPage extends StatelessWidget {
           ],
         ),
       );
+
+  String freeItem(cartItem) {
+    for (var product in cartItem) {
+      if (product.item.promotion?.requiredQuantity <= product.count &&
+          product.item.promotion?.type == PromotionType.buyNGetOneFree) {
+        return (product.count / product.item.promotion?.requiredQuantity)
+            .floor()
+            .toString();
+      }
+    }
+    return '0';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +80,9 @@ class ProductCheckoutPage extends StatelessWidget {
                                 const Divider(),
                             itemBuilder: (context, index) {
                               final item = state.cartItems[index].item;
-                              print(item.promotion);
+
                               return ListTile(
-                                  contentPadding: EdgeInsets.all(5.0),
+                                  contentPadding: const EdgeInsets.all(5.0),
                                   leading: CircleAvatar(
                                       radius: 28,
                                       backgroundColor: AppColors.primaryColor,
@@ -123,11 +135,18 @@ class ProductCheckoutPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 12),
-                        getItemTotal('Total item', state.totalItemCount),
-                        getItemTotal('Price', 6),
-                        getItemTotal('Discount', 6),
+                        getItemTotal(
+                            'Total item', state.totalItemCount.toString()),
+                        getItemTotal('Free item', freeItem(state.cartItems)),
+                        getItemTotal('Price', '£${(state.productPrice / 100)}'),
+                        getItemTotal(
+                            'Discount',
+                            state.discount > 0
+                                ? '-£${(state.discount / 100)}'
+                                : '0.0'),
                         const Divider(),
-                        getItemTotal('Total Price', 156),
+                        getItemTotal(
+                            'Total Price', '£${(state.totalPrice / 100)}'),
                       ],
                     ),
                   );

@@ -16,7 +16,7 @@ class PromotionWidget extends StatelessWidget {
         return 'Buy ${promotion.requiredQuantity}, get one free';
 
       case PromotionType.mealDeal:
-        return 'Buy D and E for £${(promotion.specialPrice / 100)}';
+        return 'Buy ${promotion.comboItems?[0]} and ${promotion.comboItems?[1]} for £${(promotion.specialPrice / 100)}';
 
       default:
         return '';

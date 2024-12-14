@@ -1,10 +1,7 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supermarket/features/checkout/presentation/cubit/checkout/checkout_cubit.dart';
 
 import 'features/checkout/presentation/screens/checkout_screen.dart';
 import 'features/checkout/presentation/screens/product_list.dart';
-import 'core/service_locator.dart';
 
 class AppRouters {
   GoRouter get router {
@@ -17,10 +14,9 @@ class AppRouters {
         ),
         GoRoute(
           path: '/checkout',
-          builder: (context, state) => const ProductCheckoutPage(),
+          builder: (context, state) => ProductCheckoutPage(),
         )
       ],
-      // errorBuilder: (context, state) => Error(),
     );
   }
 }

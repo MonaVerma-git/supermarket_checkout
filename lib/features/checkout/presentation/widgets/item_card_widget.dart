@@ -10,10 +10,15 @@ class ItemCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      semanticContainer: true,
-      elevation: 2,
-      color: AppColors.primaryLight,
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(
+              Radius.circular(8.0) //                 <--- border radius here
+              ),
+          border: Border.all(color: AppColors.primaryColor, width: 1)),
+      // semanticContainer: true,
+      // elevation: 2,
+      // color: AppColors.primaryLight,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -63,7 +68,9 @@ class ItemCardWidget extends StatelessWidget {
             // Display Promotion if exists
             Expanded(
               flex: 1,
-              child: item.promotion != null
+              child: item.promotion != null ||
+                      (item.promotion?.comboItems?[0] == item.sku ||
+                          item.promotion?.comboItems?[1] == item.sku)
                   ? PromotionWidget(promotion: item.promotion!)
                   : const SizedBox.shrink(),
             ),

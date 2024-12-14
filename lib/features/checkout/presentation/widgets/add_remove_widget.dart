@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermarket/features/checkout/domain/entities/item.dart';
+import 'package:supermarket/features/checkout/domain/entities/promotion.dart';
 import 'package:supermarket/features/checkout/presentation/cubit/checkout/checkout_cubit.dart';
 
 import '../../../../core/app_colors.dart';
@@ -34,9 +35,7 @@ class AddRemoveWidget extends StatelessWidget {
           (product) => product.item.sku == item.sku,
           orElse: () => CartItem(
             item: Item(
-              sku: item.sku,
-              price: item.price,
-            ),
+                sku: item.sku, price: item.price, promotion: item.promotion),
             count: 0,
           ),
         );
@@ -62,13 +61,13 @@ class AddRemoveWidget extends StatelessWidget {
                 ),
               ),
             ),
+
             // Add Button
             InkWell(
-              child: cardIcon('add'),
-              onTap: () {
-                checkoutCubit.addItem(item.sku, item.price);
-              },
-            ),
+                child: cardIcon('add'),
+                onTap: () {
+                  checkoutCubit.addItem(item.sku, item.price);
+                }),
           ],
         );
       },
