@@ -70,7 +70,7 @@ lib/
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your_username/supermarket_checkout.git
+   git clone https://github.com/MonaVerma-git/supermarket_checkout.git
    cd supermarket_checkout
    ```
 
