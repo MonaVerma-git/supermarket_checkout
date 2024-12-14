@@ -1,4 +1,4 @@
-import 'package:supermarket/features/checkout/domain/entities/promotion.dart';
+import 'promotion.dart';
 
 class Item {
   final String sku;

@@ -1,4 +1,4 @@
-import 'package:supermarket/features/checkout/domain/entities/item.dart';
+import 'item.dart';
 
 class CartItem {
   Item item;
@@ -8,8 +8,8 @@ class CartItem {
 
   CartItem copyWith({Item? item, int? count}) {
     return CartItem(
-      item: item ?? this.item, // if item is not passed, keep the original
-      count: count ?? this.count, // if count is not passed, keep the original
+      item: item ?? this.item,
+      count: count ?? this.count,
     );
   }
 }

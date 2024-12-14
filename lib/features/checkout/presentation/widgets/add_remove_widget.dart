@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supermarket/features/checkout/domain/entities/item.dart';
-import 'package:supermarket/features/checkout/domain/entities/promotion.dart';
-import 'package:supermarket/features/checkout/presentation/cubit/checkout/checkout_cubit.dart';
+import '../../domain/entities/item.dart';
+import '../cubit/checkout/checkout_cubit.dart';
 
 import '../../../../core/app_colors.dart';
 import '../../domain/entities/cart_item.dart';

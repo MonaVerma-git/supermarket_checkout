@@ -40,9 +40,9 @@ class PricingRepositoryImpl implements PricingRepository {
   @override
   Future<int> getTotalItemCount() async {
     int totalCount = 0;
-    _cart.forEach((item) {
+    for (var item in _cart) {
       totalCount += item.count;
-    });
+    }
     return totalCount;
   }
 
