@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../domain/entities/promotion.dart';
 import '../../../domain/repositories/pricing_repository.dart';
 import '../../../domain/usecases/calculate_total.dart';
 import '../../../domain/entities/cart_item.dart';
@@ -43,9 +44,21 @@ class CheckoutCubit extends Cubit<CheckoutState> {
 
       _applyPromotions(cartItems, items);
 
-      final productPrice = _calculateProductPrice(cartItems);
-      final totalPrice = await calculateTotalPriceUseCase.call(items);
-      final discount = productPrice - totalPrice;
+      int productPrice = _calculateProductPrice(cartItems);
+      int totalPrice = await calculateTotalPriceUseCase.call(items);
+      int discount = productPrice - totalPrice;
+
+      if (productPrice != totalPrice) {
+        discount = productPrice - totalPrice;
+      }
+
+      for (var product in cartItems) {
+        if (product.item.promotion != null &&
+            product.item.promotion?.type == PromotionType.buyNGetOneFree) {
+          totalPrice = productPrice;
+          productPrice += discount;
+        }
+      }
 
       emit(CheckoutState(
         cartItems: cartItems,
