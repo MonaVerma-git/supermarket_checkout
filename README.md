@@ -1,6 +1,6 @@
 # Supermarket Checkout System
 
-A **Flutter application** for managing supermarket checkout processes, including product listing, adding/removing items to/from a cart, and applying promotions like "Buy N Get One Free". This project uses **Bloc** for state management and follows clean architecture principles.
+A **Flutter application** for managing supermarket checkout processes, including product listing, adding/removing items to/from a cart, and applying promotions like "Buy N Get One Free". 
 
 ---
 
@@ -91,6 +91,30 @@ lib/
 
 ---
 
+## How to Run the Project
+
+To run the project locally:
+
+1. Make sure you have **Flutter** installed. If not, follow the [Flutter installation guide](https://flutter.dev/docs/get-started/install).
+2. Navigate to the project directory:
+   ```bash
+   cd supermarket_checkout
+   ```
+3. Install dependencies:
+   ```bash
+   flutter pub get
+   ```
+4. Run the project on a connected device or emulator:
+   ```bash
+   flutter run
+   ```
+5. To execute tests:
+   ```bash
+   flutter test
+   ```
+
+---
+
 ## Testing
 
 This project includes unit tests and widget tests for ensuring code reliability.
@@ -104,37 +128,6 @@ To execute tests, run:
 ```bash
 flutter test
 ```
-
----
-
-## UI Demo (Optional)
-
-Add screenshots or GIFs of the app to showcase product listing, cart management, and checkout pages.
-
----
-
-## Contributions
-
-Contributions are welcome! If you'd like to improve the app or add new features:
-
-1. Fork the repository.
-2. Create a feature branch:
-   ```bash
-   git checkout -b new-feature
-   ```
-3. Commit your changes and push:
-   ```bash
-   git commit -m "Add new feature"
-   git push origin new-feature
-   ```
-4. Open a Pull Request.
-
----
-
-## License
-
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
-
 ---
 
 ## Contact
@@ -142,8 +135,8 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 For questions or feedback, please contact:
 
 - **Name**: Mona Verma  
-- **Email**: your_email@example.com  
-- **LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/your-profile)
+- **Email**: mn.monaverma@gmail.com  
+- **LinkedIn**: https://linkedin.com/in/mona-v-verma
 
 ---
 
