@@ -14,7 +14,7 @@ import '../widgets/promotion_widget.dart';
 class ProductCheckoutPage extends StatelessWidget {
   const ProductCheckoutPage({super.key});
 
-  Widget getItemTotal(String title, String value, Key key) => Padding(
+  Widget _buildItemTotal(String title, String value, Key key) => Padding(
         key: key,
         padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 5.0),
         child: Row(
@@ -38,7 +38,7 @@ class ProductCheckoutPage extends StatelessWidget {
         ),
       );
 
-  String freeItem(List<CartItem> cartItems) {
+  String _getFreeItem(List<CartItem> cartItems) {
     String freeCount = '0';
     for (var product in cartItems) {
       final promotion = product.item.promotion;
@@ -149,22 +149,24 @@ class ProductCheckoutPage extends StatelessWidget {
                       ),
                       _buildSummaryHeader('Price Total'),
                       const SizedBox(height: 12),
-                      getItemTotal(
+                      _buildItemTotal(
                           'Total item',
                           state.totalItemCount.toString(),
                           const Key('checkout_total_items')),
-                      getItemTotal('Free item', freeItem(state.cartItems),
+                      _buildItemTotal(
+                          'Free item',
+                          _getFreeItem(state.cartItems),
                           const Key('checkout_free_items')),
-                      getItemTotal('Price', '£${(state.productPrice / 100)}',
+                      _buildItemTotal('Price', '£${(state.productPrice / 100)}',
                           const Key('checkout_product_price')),
-                      getItemTotal(
+                      _buildItemTotal(
                           'Discount',
                           state.discount > 0
                               ? '-£${(state.discount / 100)}'
                               : '0.0',
                           const Key('checkout_discount')),
                       const Divider(),
-                      getItemTotal(
+                      _buildItemTotal(
                           'Total Price',
                           '£${(state.totalPrice / 100)}',
                           const Key('checkout_total_price')),

@@ -11,7 +11,7 @@ class AddRemoveWidget extends StatelessWidget {
   final Item item;
   const AddRemoveWidget({super.key, required this.item});
 
-  Widget cardIcon(String flag) => Container(
+  Widget _buildAddRemoveWidget(String flag) => Container(
         decoration: BoxDecoration(
           color: flag == 'add' ? AppColors.primaryColor : AppColors.redColor,
           borderRadius: BorderRadius.circular(4),
@@ -44,7 +44,7 @@ class AddRemoveWidget extends StatelessWidget {
           children: [
             // Remove Button
             InkWell(
-              child: cardIcon('remove'),
+              child: _buildAddRemoveWidget('remove'),
               onTap: () {
                 checkoutCubit.removeItem(item.sku);
               },
@@ -63,7 +63,7 @@ class AddRemoveWidget extends StatelessWidget {
 
             // Add Button
             InkWell(
-                child: cardIcon('add'),
+                child: _buildAddRemoveWidget('add'),
                 onTap: () {
                   checkoutCubit.addItem(item.sku, item.price);
                 }),

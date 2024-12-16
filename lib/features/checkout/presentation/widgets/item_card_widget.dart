@@ -12,13 +12,9 @@ class ItemCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(
-              Radius.circular(8.0) //                 <--- border radius here
+          borderRadius: const BorderRadius.all(Radius.circular(8.0) //
               ),
           border: Border.all(color: AppColors.primaryColor, width: 1)),
-      // semanticContainer: true,
-      // elevation: 2,
-      // color: AppColors.primaryLight,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(

@@ -7,7 +7,7 @@ class PromotionWidget extends StatelessWidget {
   const PromotionWidget({super.key, required this.promotion});
 
   // Handle promotions with switch case
-  String promotionText(Promotion promotion) {
+  String _buildPromotionText(Promotion promotion) {
     switch (promotion.type) {
       case PromotionType.multipriced:
         return 'Buy ${promotion.requiredQuantity} for £${(promotion.specialPrice / 100)}';
@@ -26,7 +26,7 @@ class PromotionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      promotionText(promotion),
+      _buildPromotionText(promotion),
       style: TextStyle(
         color: AppColors.accentColor,
         fontWeight: FontWeight.bold,
