@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/colors.dart';
+import '../../../../core/app_colors.dart';
 
 class EmptyCartWidget extends StatelessWidget {
   const EmptyCartWidget({super.key});
